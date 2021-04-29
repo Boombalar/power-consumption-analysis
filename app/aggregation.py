@@ -1,9 +1,16 @@
 import pandas as pd
 
 
-def aggregate_measurements(tvec: pd.DataFrame, data: pd.DataFrame, period: str):
+class periods:
+    hour = "hour"
+    day = "day"
+    month = "month"
+    hour_of_the_day = "hour of the day"
+
+
+def aggregate_measurements(tvec: pd.DataFrame, data: pd.DataFrame, period: periods):
     dataset = pd.concat([tvec, data], axis=1)
-    if period == "hour of the day":
+    if period == periods.hour_of_the_day:
         data_a = dataset.groupby("hour").mean()
         data_a = data_a.iloc[:, 5:10]
         tvec_a = data_a.index
