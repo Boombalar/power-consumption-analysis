@@ -30,8 +30,3 @@ def load_measurements(filename: str, fmode: str):
         print(f"File with name {filename} could not be loaded")
     except Exception:
         print("An unexpected error occurred")
-
-
-print(load_measurements("2008.csv", "forward fill")[1])
-print(load_measurements("2008.csv", "backward fill")[1])
-print(load_measurements("2008.csv", "drop")[1])
