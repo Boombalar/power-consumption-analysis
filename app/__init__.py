@@ -1,6 +1,7 @@
 import sys
 import tui
 import display_statistics
+import visuals
 
 """
 Created May 2021
@@ -29,7 +30,7 @@ while True:
         statistics = aggregated_data if aggregated_data is not None else data
         display_statistics.print_statistics(statistics[0], statistics[1])
     elif selected_item == 4:
-        print("pretty graph")
+        visuals.plot(data[0], data[1], False)
     elif selected_item == 9:
         print("System is exiting.")
         sys.exit(0)

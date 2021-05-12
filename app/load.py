@@ -1,8 +1,21 @@
 import numpy as np
 import pandas as pd
 
+'''
+Created May 2021
+
+Purpose: to load the data from the data folder
+
+@author Mathias Fager, s175182
+'''
 
 def load_measurements(filename: str, fmode: str):
+    '''
+    Function to load the data from the data folder
+    :param filename: The filename of the dataset to load from the data folder
+    :param fmode: filling mode, whether to backward or forward fill
+    :return: 2 datasets containing the timevectors and the data from the zones
+    '''
     try:
         dataset = pd.read_csv("../data/" + filename, header=None)
         dataset.columns = ['year', 'month', 'day', 'hour', 'minute', 'second', 'zone1', 'zone2', 'zone3', 'zone4']
