@@ -1,6 +1,7 @@
-import load
 import pandas as pd
+import aggregation
 from tabulate import tabulate
+import tui
 
 
 def get_quantiles(data) -> []:
@@ -12,12 +13,13 @@ def get_quantiles(data) -> []:
     return data_quantiles
 
 
-def print_statistics(tvec, data) -> None:
+def print_statistics(tvec, data, aggregation: aggregation.Periods = None) -> None:
     '''
     Prints percentiles for each zone
     @Author: Oliver Storm Køppen s175108
     :param tvec:  An N × 6 matrix where each row is a time vector.
     :param data: An N × 4 matrix where each row is a set of measurements.
+    :param aggregation: (optional) Aggregation period
     :return: None
     '''
     print(tvec)
@@ -31,8 +33,5 @@ def print_statistics(tvec, data) -> None:
     table_data.append(get_quantiles(data["zone1"].append(data["zone2"]).append(data["zone3"]).append(data["zone4"])))
     table_data = pd.DataFrame(table_data, index, columns)
     print(tabulate(table_data, headers=columns, tablefmt='pretty'))
-
-data = load.load_measurements("2008.csv", "drop")
-# print(load.load_measurements("2008.csv", "drop"))
-print(data)
-print_statistics(data[0], data[1])
+    if aggregation is not None:
+        print("The data has been aggregated to only show " + aggregation)
