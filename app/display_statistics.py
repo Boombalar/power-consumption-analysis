@@ -13,7 +13,7 @@ def get_quantiles(data) -> []:
     return data_quantiles
 
 
-def print_statistics(tvec, data, aggregation: aggregation.Periods = None) -> None:
+def print_statistics(tvec, data) -> None:
     '''
     Prints percentiles for each zone
     @Author: Oliver Storm Køppen s175108
@@ -22,7 +22,6 @@ def print_statistics(tvec, data, aggregation: aggregation.Periods = None) -> Non
     :param aggregation: (optional) Aggregation period
     :return: None
     '''
-    print(tvec)
     table_data = []
     table_data.append(get_quantiles(data["zone1"]))
     table_data.append(get_quantiles(data["zone2"]))
@@ -33,5 +32,4 @@ def print_statistics(tvec, data, aggregation: aggregation.Periods = None) -> Non
     table_data.append(get_quantiles(data["zone1"].append(data["zone2"]).append(data["zone3"]).append(data["zone4"])))
     table_data = pd.DataFrame(table_data, index, columns)
     print(tabulate(table_data, headers=columns, tablefmt='pretty'))
-    if aggregation is not None:
-        print("The data has been aggregated to only show " + aggregation)
+    print("The table shows consumption per " + tvec.name)

@@ -54,7 +54,8 @@ def loadDataMenu() -> tuple:
     """
     default_file = "2008.csv"
     print("No data is currently loaded.")
-    print(default_file + " is loaded.")
+    file_name = input("Enter name of file followed or ENTER for default (" + default_file + ")")
+    print(file_name or default_file + " is loaded.")
     print("How should corrupted measurement be handled?")
     print(colored("1", "blue") + " Forward Fill - Replace with latest valid measurement")
     print(colored("2", "blue") + " Backward Fill - Replace with next valid measurement")
@@ -62,7 +63,9 @@ def loadDataMenu() -> tuple:
     fmode = input("Choose one")
     try:
         mode = corruption_mode[fmode]
-        data = load.load_measurements(default_file, mode)
+        data = load.load_measurements(file_name or default_file, mode)
+        if data is None:
+            raise Exception
         print(colored("Data was loaded successfully", "green"))
         return data
     except Exception:
@@ -90,7 +93,7 @@ def aggregateDataMenu(data: tuple):
         mode = aggregation_mode[amode]
         data = aggregation.aggregate_measurements(data[0], data[1], mode)
         print(colored("Data was aggregated", "green"))
-        return data, mode
+        return data
     except Exception as e:
         print(e)
         print(colored("Data could not be aggregated", "red"))

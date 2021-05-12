@@ -12,7 +12,6 @@ Purpose: The main script to navigate the program
 
 data = None
 aggregated_data = None
-aggregation_mode = None
 
 while True:
     """
@@ -25,12 +24,10 @@ while True:
         aggregated_data = None
         data = tui.loadDataMenu()
     elif selected_item == 2:
-        aggregation = tui.aggregateDataMenu(data)
-        aggregation_data = aggregation[0]
-        aggregation_mode = aggregation[1]
+        aggregated_data = tui.aggregateDataMenu(data)
     elif selected_item == 3:
         statistics = aggregated_data if aggregated_data is not None else data
-        display_statistics.print_statistics(statistics[0], statistics[1], aggregation_mode)
+        display_statistics.print_statistics(statistics[0], statistics[1])
     elif selected_item == 4:
         print("pretty graph")
     elif selected_item == 9:
