@@ -31,12 +31,15 @@ def plot(tvec: pd.DataFrame, data: pd.DataFrame, combineZones: bool):
         plt.title("Energy consumption (all zones)")
         plt.show()
     else:
-        for column in data:
+        fig, axs = plt.subplots(2, 2, figsize=(16, 10))
+        axs = axs.flatten()
+        for index, column in enumerate(data):
             if len(data) < 25:
-                plt.bar(x, data[column], width=12)
+                axs[index].bar(x, data[column], width=12)
+                axs[index].set(xlabel="Time", ylabel="Consumption (Wh)")
+                axs[index].set_title(f"Energy consumption ({column})")
             else:
-                plt.plot(x, data[column])
-            plt.xlabel("Time")
-            plt.ylabel("Consumption (Wh)")
-            plt.title(f"Energy consumption ({column})")
-            plt.show()
+                axs[index].plot(x, data[column])
+                axs[index].set(xlabel="Time", ylabel="Consumption (Wh)")
+                axs[index].set_title(f"Energy consumption ({column})")
+        plt.show()
