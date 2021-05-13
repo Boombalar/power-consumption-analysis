@@ -30,7 +30,7 @@ while True:
         statistics = aggregated_data if aggregated_data is not None else data  # We know data is always present at this point
         display_statistics.print_statistics(statistics[0], statistics[1])
     elif selected_item == 4: # visualize plots
-        tui.visualsMenu(data)
+        tui.visualsMenu(aggregated_data or data)
     elif selected_item == 9: # exit
         print("System is exiting.")
         sys.exit(0)

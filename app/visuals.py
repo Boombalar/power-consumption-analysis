@@ -20,10 +20,13 @@ def plot(tvec: pd.DataFrame, data: pd.DataFrame, combineZones: bool):
     '''
     if tvec.empty or data.empty:
         raise Exception("The dataset is empty")
-    x = pd.to_datetime(tvec)
+    if isinstance(tvec, pd.Index):
+        x = tvec
+    else:
+        x = pd.to_datetime(tvec)
     if combineZones:
         if len(data) < 25:
-            plt.bar(x, data.sum(axis=1), width=12)
+            plt.bar(x, data.sum(axis=1))
         else:
             plt.plot(x, data.sum(axis=1))
         plt.xlabel("Time")
@@ -35,7 +38,7 @@ def plot(tvec: pd.DataFrame, data: pd.DataFrame, combineZones: bool):
         axs = axs.flatten()
         for index, column in enumerate(data):
             if len(data) < 25:
-                axs[index].bar(x, data[column], width=12)
+                axs[index].bar(x, data[column])
                 axs[index].set(xlabel="Time", ylabel="Consumption (Wh)")
                 axs[index].set_title(f"Energy consumption ({column})")
             else:
