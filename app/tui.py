@@ -110,6 +110,8 @@ def aggregateDataMenu(data: tuple) -> tuple:
     try:
         amode = input("Choose one")
         allowed_selection(amode, [1, 2, 3, 4, 5])
+        if amode == "1": # If by the minute we want to reset the data aggregation
+            return None
         mode = aggregation_modes[amode]
         data = aggregation.aggregate_measurements(data[0], data[1], mode)
         print(colored("Data was aggregated", "green"))
