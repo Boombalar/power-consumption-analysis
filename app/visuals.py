@@ -23,12 +23,12 @@ def plot(tvec: pd.DataFrame, data: pd.DataFrame, combineZones: bool):
     x = pd.to_datetime(tvec)
     if combineZones:
         if len(data) < 25:
-            plt.bar(x, data.sum(axis=1))
+            plt.bar(x, data.sum(axis=1), width=12)
         else:
             plt.plot(x, data.sum(axis=1))
-        plt.xlabel("Timescale")
-        plt.ylabel("Sum of all zones")
-        plt.title("Plot for sum of all zones")
+        plt.xlabel("Time")
+        plt.ylabel("Consumption (Wh)")
+        plt.title("Energy consumption (all zones)")
         plt.show()
     else:
         for column in data:
@@ -36,7 +36,7 @@ def plot(tvec: pd.DataFrame, data: pd.DataFrame, combineZones: bool):
                 plt.bar(x, data[column], width=12)
             else:
                 plt.plot(x, data[column])
-            plt.xlabel("Timescale")
-            plt.ylabel("Watt")
-            plt.title(f"Plot for {column}")
+            plt.xlabel("Time")
+            plt.ylabel("Consumption (Wh)")
+            plt.title(f"Energy consumption ({column})")
             plt.show()
