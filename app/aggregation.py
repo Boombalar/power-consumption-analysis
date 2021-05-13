@@ -13,7 +13,6 @@ class Periods:
     '''
     class to avoid strings in the aggregate_measurements method
     '''
-    MINUTE = "minute"
     HOUR = "hour"
     DAY = "day"
     MONTH = "month"
